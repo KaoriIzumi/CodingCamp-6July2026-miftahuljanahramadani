@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense &amp; Budget Visualizer</title>
+  <link rel="stylesheet" href="CSS/style.css" />
+  <!-- Chart.js CDN (loaded synchronously so it is available when app.js runs) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <h1 class="app-title">Expense &amp; Budget Visualizer</h1>
+    <p class="app-subtitle">Track your daily spending</p>
+  </header>
+
+  <main class="app-main">
+
+    <!-- TOP ROW: Balance + Form -->
+    <div class="top-row">
+
+      <!-- Balance Display -->
+      <section class="card balance-card" aria-label="Balance summary">
+        <h2 class="section-title">Balance</h2>
+        <p class="balance-amount" id="balance">$0.00</p>
+        <div class="balance-stats">
+          <div class="stat expense-stat">
+            <span class="stat-label">Expenses</span>
+            <span class="stat-value" id="total-expenses">$0.00</span>
+          </div>
+        </div>
+        <div class="spending-limit-row">
+          <label for="spending-limit" class="limit-label">Monthly Limit ($)</label>
+          <div class="input-row limit-input-row">
+            <input type="number" id="spending-limit" min="0"  class="limit-input" />
+            <button type="button" class="btn btn-ghost-light" id="set-limit-btn">Set</button>
+          </div>
+          <span class="limit-status" id="limit-status"></span>
+        </div>
+      </section>
+
+      <!-- Add Transaction Form -->
+      <section class="card form-card" aria-label="Add transaction">
+        <h2 class="section-title">Add Transaction</h2>
+        <form id="transaction-form" novalidate>
+
+          <div class="form-group">
+            <label for="description">Item Name</label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+            />
+            <span class="field-error" id="desc-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+            />
+            <span class="field-error" id="amount-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="new-category">Add Custom Category</label>
+            <div class="input-row">
+              <input type="text" id="new-category" name="new-category" placeholder="e.g. Gym, Pets..." maxlength="30" autocomplete="off" />
+              <button type="button" class="btn btn-secondary" id="add-category-btn">Add</button>
+            </div>
+            <span class="field-error" id="category-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <span class="field-error" id="storage-error" role="alert" aria-live="polite"></span>
+
+          <button type="submit" class="btn btn-primary">Add Transaction</button>
+        </form>
+      </section>
+
+    </div>
+
+    <!-- BOTTOM ROW: Chart + Transaction List -->
+    <div class="bottom-row">
+
+      <!-- Spending Chart -->
+      <section class="card chart-card" aria-label="Spending chart">
+        <h2 class="section-title">Spending by Category</h2>
+        <div class="chart-wrapper" id="chart-wrapper">
+          <canvas
+            id="spending-chart"
+            aria-label="Doughnut chart of spending by category"
+            role="img"
+          ></canvas>
+        </div>
+        <p class="placeholder-text" id="chart-placeholder">
+          No expense data yet. Add expense transactions to see the chart.
+        </p>
+      </section>
+
+      <!-- Filter + Transaction List -->
+      <section class="card list-card" aria-label="Transaction history">
+        <div class="list-header">
+          <h2 class="section-title">Transaction History</h2>
+          <div class="filter-group">
+            <label for="filter-category" class="sr-only">Filter by category</label>
+            <select id="filter-category" aria-label="Filter transactions by category">
+              <option value="All">All Categories</option>
+            </select>
+          </div>
+        </div>
+
+        <ul
+          class="transaction-list scrollable-list"
+          id="transaction-list"
+          role="list"
+          aria-label="Transaction history list"
+        ></ul>
+        <p class="placeholder-text" id="list-placeholder">
+          No transactions yet. Add one above!
+        </p>
+      </section>
+
+    </div>
+
+    <!-- MONTHLY SUMMARY -->
+    <section class="card monthly-card" aria-label="Monthly summary">
+      <div class="monthly-header">
+        <h2 class="section-title">Monthly Summary</h2>
+        <div class="month-nav">
+          <button type="button" class="btn btn-ghost" id="month-prev" aria-label="Previous month">&#8249;</button>
+          <span class="month-label" id="month-label">—</span>
+          <button type="button" class="btn btn-ghost" id="month-next" aria-label="Next month">&#8250;</button>
+        </div>
+      </div>
+      <div id="monthly-summary-content">
+        <p class="placeholder-text" id="monthly-placeholder">No transactions for this month.</p>
+        <ul class="monthly-list" id="monthly-list"></ul>
+        <div class="monthly-total" id="monthly-total" hidden>
+          <span>Total</span>
+          <span id="monthly-total-value">$0.00</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="JS/app.js"></script>
+</body>
+</html>

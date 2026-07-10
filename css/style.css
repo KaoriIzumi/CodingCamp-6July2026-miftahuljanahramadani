@@ -1,0 +1,827 @@
+/* =========================================================
+   CSS Custom Properties
+   ========================================================= */
+:root {
+  --clr-primary:       #6366f1;   /* indigo-500  */
+  --clr-primary-dark:  #4f46e5;   /* indigo-600  */
+  --clr-primary-light: #e0e7ff;   /* indigo-100  */
+  --clr-bg:            #f1f5f9;   /* slate-100   */
+  --clr-surface:       #ffffff;
+  --clr-text:          #1e293b;   /* slate-800   */
+  --clr-muted:         #64748b;   /* slate-500   */
+  --clr-border:        #cbd5e1;   /* slate-300   */
+  --clr-expense:       #dc2626;   /* red-600     */
+  --clr-expense-bg:    #fee2e2;   /* red-100     */
+  --clr-error:         #b91c1c;   /* red-700     */
+  --radius:            0.75rem;
+  --shadow:            0 2px 8px rgba(0,0,0,.08);
+  --transition:        0.18s ease;
+}
+
+/* =========================================================
+   Reset & Base
+   ========================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =========================================================
+   Header
+   ========================================================= */
+.app-header {
+  background: var(--clr-primary);
+  color: #fff;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.app-subtitle {
+  font-size: 0.875rem;
+  opacity: 0.85;
+  margin-top: 0.25rem;
+}
+
+/* =========================================================
+   Main layout
+   ========================================================= */
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.top-row,
+.bottom-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* =========================================================
+   Cards
+   ========================================================= */
+.card {
+  background: var(--clr-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  margin-bottom: 1rem;
+}
+
+/* =========================================================
+   Balance Card
+   ========================================================= */
+.balance-card {
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.balance-card .section-title {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.balance-amount {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  word-break: break-all;
+}
+
+.balance-stats {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.stat {
+  flex: 1;
+  background: rgba(255,255,255,0.15);
+  border-radius: 0.5rem;
+  padding: 0.625rem 0.75rem;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.8;
+  margin-bottom: 0.2rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.expense-stat .stat-value { color: #fca5a5; /* red-300 */ }
+
+/* =========================================================
+   Form Card
+   ========================================================= */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.875rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--clr-muted);
+  margin-bottom: 0.35rem;
+}
+
+.form-group input,
+.form-group select {
+  height: 44px;
+  padding: 0 0.75rem;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  color: var(--clr-text);
+  background: var(--clr-surface);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.18);
+}
+
+.form-group input.invalid,
+.form-group select.invalid {
+  border-color: var(--clr-error);
+}
+
+.form-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.field-error {
+  font-size: 0.8rem;
+  color: var(--clr-error);
+  min-height: 1.1em;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  min-width: 44px;
+  padding: 0 1.25rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--clr-primary);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--clr-primary);
+  color: #fff;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.btn-primary:hover {
+  background: var(--clr-primary-dark);
+  box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-delete {
+  background: transparent;
+  color: var(--clr-expense);
+  border: 1.5px solid var(--clr-expense);
+  border-radius: 0.4rem;
+  font-size: 0.8125rem;
+  height: 44px;
+  min-width: 44px;
+  padding: 0 0.75rem;
+  flex-shrink: 0;
+  transition: background var(--transition), color var(--transition);
+}
+
+.btn-delete:hover {
+  background: var(--clr-expense);
+  color: #fff;
+}
+
+.btn-delete:focus-visible {
+  outline: 3px solid var(--clr-expense);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Chart Card
+   ========================================================= */
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.chart-wrapper canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* =========================================================
+   Transaction List Card
+   ========================================================= */
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.list-header .section-title {
+  margin-bottom: 0;
+}
+
+.filter-group select {
+  height: 44px;
+  padding: 0 0.75rem;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--clr-text);
+  background: var(--clr-surface);
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color var(--transition);
+  min-width: 150px;
+}
+
+.filter-group select:focus {
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.18);
+}
+
+/* Scrollable list — required spec */
+.scrollable-list {
+  max-height: 250px;
+  overflow-y: scroll;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-right: 0.25rem; /* room for scrollbar */
+}
+
+/* Custom scrollbar (webkit) */
+.scrollable-list::-webkit-scrollbar { width: 6px; }
+.scrollable-list::-webkit-scrollbar-track { background: var(--clr-bg); border-radius: 3px; }
+.scrollable-list::-webkit-scrollbar-thumb { background: var(--clr-border); border-radius: 3px; }
+.scrollable-list::-webkit-scrollbar-thumb:hover { background: var(--clr-muted); }
+
+/* =========================================================
+   Transaction Item
+   ========================================================= */
+.transaction-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--clr-bg);
+  border-left: 4px solid transparent;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.transaction-item:hover {
+  background: var(--clr-primary-light);
+  transform: translateX(2px);
+}
+
+.transaction-item.expense {
+  border-left-color: var(--clr-expense);
+}
+
+.transaction-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.transaction-description {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.transaction-meta {
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+  margin-top: 0.15rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.transaction-badge {
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-expense {
+  background: var(--clr-expense-bg);
+  color: var(--clr-expense);
+}
+
+.transaction-amount {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.transaction-amount.expense { color: var(--clr-expense); }
+
+/* =========================================================
+   Placeholder text
+   ========================================================= */
+.placeholder-text {
+  text-align: center;
+  color: var(--clr-muted);
+  font-size: 0.875rem;
+  padding: 1.5rem 0;
+}
+
+/* =========================================================
+   Desktop layout (≥ 768px)
+   ========================================================= */
+@media (min-width: 768px) {
+  .app-header {
+    padding: 1.5rem 2rem;
+  }
+
+  .app-title {
+    font-size: 1.875rem;
+  }
+
+  .app-main {
+    padding: 1.5rem 1.5rem 3rem;
+    gap: 1.5rem;
+  }
+
+  .top-row {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .top-row > .card {
+    flex: 1 1 50%;
+  }
+
+  .bottom-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .bottom-row > .card {
+    flex: 1 1 50%;
+  }
+
+  .balance-amount {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-main {
+    padding: 2rem 2rem 3rem;
+  }
+}
+
+/* =========================================================
+   Mobile refinements (< 480px — small phones)
+   ========================================================= */
+@media (max-width: 479px) {
+  /* Tighter header on very small screens */
+  .app-header {
+    padding: 1rem 1rem;
+  }
+
+  .app-title {
+    font-size: 1.2rem;
+  }
+
+  /* Reduce card padding so content breathes without overflowing */
+  .card {
+    padding: 1rem;
+  }
+
+  /* Bigger balance number is fine, but cap it so it never wraps weirdly */
+  .balance-amount {
+    font-size: 1.625rem;
+  }
+
+  /* Transaction list header: stack title and filter vertically */
+  .list-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Filter dropdown full width on small screens */
+  .filter-group select {
+    width: 100%;
+    min-width: unset;
+  }
+
+  /* Transaction item: tighten spacing so delete button doesn't get cut off */
+  .transaction-item {
+    gap: 0.5rem;
+    padding: 0.625rem 0.5rem;
+  }
+
+  /* Amount + delete sit on a second line on very narrow phones */
+  .transaction-item {
+    flex-wrap: wrap;
+  }
+
+  .transaction-info {
+    flex-basis: 100%;
+  }
+
+  .transaction-amount {
+    font-size: 0.875rem;
+    flex: 1;
+  }
+
+  .btn-delete {
+    font-size: 0.75rem;
+    padding: 0 0.625rem;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  /* Chart max width — slightly wider on phone so segments are readable */
+  .chart-wrapper {
+    max-width: 260px;
+  }
+
+  /* Reduce gap between stat boxes */
+  .balance-stats {
+    gap: 0.625rem;
+  }
+}
+
+/* =========================================================
+   Custom Category Input Row
+   ========================================================= */
+.input-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.input-row input {
+  flex: 1;
+}
+
+.btn-secondary {
+  background: var(--clr-primary-light);
+  color: var(--clr-primary-dark);
+  border: none;
+  height: 44px;
+  min-width: 60px;
+  padding: 0 0.875rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+
+.btn-secondary:hover {
+  background: #c7d2fe; /* indigo-200 */
+}
+
+/* =========================================================
+   Spending Limit (inside balance card)
+   ========================================================= */
+.spending-limit-row {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.limit-label {
+  font-size: 0.75rem;
+  opacity: 0.85;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.limit-input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.limit-input {
+  flex: 1;
+  height: 40px;
+  padding: 0 0.75rem;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  border-radius: 0.5rem;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.limit-input::placeholder {
+  color: rgba(255,255,255,0.55);
+}
+
+.limit-input:focus {
+  border-color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.2);
+}
+
+.btn-ghost-light {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  height: 40px;
+  min-width: 44px;
+  padding: 0 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+
+.btn-ghost-light:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.limit-status {
+  font-size: 0.75rem;
+  min-height: 1.1em;
+}
+
+.over-limit-text {
+  color: #fca5a5; /* red-300 — visible on dark bg */
+  font-weight: 600;
+}
+
+.under-limit-text {
+  color: #86efac; /* green-300 */
+}
+
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.65; }
+}
+
+.over-limit-pulse {
+  animation: pulse-red 1.4s ease-in-out infinite;
+  color: #fca5a5 !important;
+}
+
+/* =========================================================
+   Monthly Summary Card
+   ========================================================= */
+.monthly-card {
+  width: 100%;
+}
+
+.monthly-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.monthly-header .section-title {
+  margin-bottom: 0;
+}
+
+.month-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.month-label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  min-width: 140px;
+  text-align: center;
+  color: var(--clr-text);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--clr-primary);
+  border: 1.5px solid var(--clr-border);
+  height: 36px;
+  min-width: 36px;
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.btn-ghost:hover {
+  background: var(--clr-primary-light);
+  border-color: var(--clr-primary);
+}
+
+.monthly-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.monthly-list::-webkit-scrollbar { width: 5px; }
+.monthly-list::-webkit-scrollbar-track { background: var(--clr-bg); }
+.monthly-list::-webkit-scrollbar-thumb { background: var(--clr-border); border-radius: 3px; }
+
+.monthly-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--clr-bg);
+  font-size: 0.875rem;
+}
+
+.monthly-item-desc {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.monthly-item-cat {
+  font-size: 0.75rem;
+  background: var(--clr-primary-light);
+  color: var(--clr-primary-dark);
+  padding: 0.1rem 0.4rem;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.monthly-item-date {
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+  white-space: nowrap;
+}
+
+.monthly-item-amount {
+  font-weight: 700;
+  color: var(--clr-expense);
+  white-space: nowrap;
+  text-align: right;
+}
+
+.monthly-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 0.75rem;
+  margin-top: 0.625rem;
+  border-top: 2px solid var(--clr-border);
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.monthly-total.over-limit {
+  background: var(--clr-expense-bg);
+  border-radius: 0 0 var(--radius) var(--radius);
+  border-top-color: var(--clr-expense);
+}
+
+#monthly-total-value.over-limit {
+  color: var(--clr-expense);
+}
+
+@media (max-width: 479px) {
+  .monthly-item {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+  }
+
+  .monthly-item-desc   { grid-column: 1; grid-row: 1; }
+  .monthly-item-amount { grid-column: 2; grid-row: 1; }
+  .monthly-item-cat    { grid-column: 1; grid-row: 2; }
+  .monthly-item-date   { grid-column: 2; grid-row: 2; font-size: 0.7rem; }
+
+  .month-label {
+    min-width: 110px;
+    font-size: 0.875rem;
+  }
+}
